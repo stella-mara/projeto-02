@@ -7,22 +7,10 @@ using projeto_02.Models.Enum;
 
 namespace projeto_02.Models.ViewModels
 {
-    public class PostUsuario
+     public class PostUsuario
     {
         [Required(ErrorMessage = "O campo Nome Completo é obrigatório.")]
         [StringLength(Pessoa.NomeMaxLength, ErrorMessage = "O campo Nome Completo deve ter no máximo 100 caracteres.")]
-    public PostUsuario(string nomeCommpleto, string genero, DateTime dataNascimento, string cpfCnpj, string telefone, string email, TipoUsuario tipoUsuario, Status status) 
-        {
-  this.NomeCommpleto = nomeCommpleto;
-  this.Genero = genero;
-  this.DataNascimento = dataNascimento;
-  this.CpfCnpj = cpfCnpj;
-  this.Telefone = telefone;
-  this.Email = email;
-  this.TipoUsuario = tipoUsuario;
-  this.Status = status;
-   
-        }
         public string NomeCommpleto { get; set; }
 
         [Required(ErrorMessage = "O campo Gênero é obrigatório.")]
