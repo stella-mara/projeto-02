@@ -82,6 +82,31 @@ namespace projeto_02.Controllers
                 return BadRequest("Erro ao alterar status usuário");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromQuery] Status? status)
+        {
+            try
+            {
+                return Ok(await _service.GetAllAsync(status));
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Erro ao listar usuários");
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
+        {
+            try
+            {
+                return Ok(await _service.GetByIdAsync(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Erro ao obter usuário");
+            }
+        }
 
     }
 }
