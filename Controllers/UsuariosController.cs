@@ -10,7 +10,7 @@ using projeto_02.Models.ViewModels;
 
 namespace projeto_02.Controllers
 {
-    [ApiController]
+     [ApiController]
     [Route("api/[controller]")]
     public class UsuariosController : ControllerBase
     {
@@ -41,7 +41,8 @@ namespace projeto_02.Controllers
                 return BadRequest("Erro ao criar usuário");
             }
         }
-         [HttpPut("{id}")]
+
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] PutUsuario usuario)
         {
             try
@@ -82,6 +83,7 @@ namespace projeto_02.Controllers
                 return BadRequest("Erro ao alterar status usuário");
             }
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] Status? status)
         {
@@ -107,6 +109,5 @@ namespace projeto_02.Controllers
                 return BadRequest("Erro ao obter usuário");
             }
         }
-
     }
 }
