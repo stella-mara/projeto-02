@@ -22,5 +22,13 @@ namespace projeto_02.Database
             var assembly = GetType().Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         }
+
+            public DbSet<Pessoa> Pessoas { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        // Configurar a string de conexão com o banco de dados
+        optionsBuilder.UseSqlServer("labclothingcollectionbd");
+    }
     }
     }
