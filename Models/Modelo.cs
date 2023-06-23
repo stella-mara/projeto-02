@@ -14,7 +14,7 @@ namespace projeto_02.Models
         public int Id { get; set; }
         public string NomeModelo { get; set; }
         public int IdColecaoRelacionada { get; set; }
-        public Tipo Tio { get; set; }
+        public Tipo Tipo { get; set; }
         public Layout Layout  { get; set; }
     }
 }

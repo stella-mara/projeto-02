@@ -13,23 +13,18 @@ namespace projeto_02.Models.ViewModels
         [IgnoreDataMember]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "O campo Nome da Coleção é obrigatório.")]
-        public string NomeColecao { get; set; }
+        [Required(ErrorMessage = "O campo Nome do Modelo é obrigatório.")]
+        public string NomeModelo { get; set; }
 
         [IgnoreDataMember]
-        public int IdResponsavel { get; set; }
+        public int IdColecaoRelacionada { get; set; }
 
-        [Required(ErrorMessage = "O campo Marca é obrigatório.")]
-        public string Marca { get; set; }
+        [Required(ErrorMessage = "O campo Tipo é obrigatório.")]
+        [EnumDataType(typeof(Tipo), ErrorMessage = "O campo Tipo é inválido.")]
+        public Tipo Tipo { get; set; }
 
-        [Required(ErrorMessage = "O campo Orçamento é obrigatório.")]
-        public double Orcamento { get; set; }
-
-        [Required(ErrorMessage = "O campo Ano de Lançamento é obrigatório.")]
-        public DateTime AnoLancamento { get; set; }
-
-        [Required(ErrorMessage = "O campo Estação é obrigatório.")]
-        [EnumDataType(typeof(Estacao), ErrorMessage = "O campo Estação é inválido.")]
-        public Estacao Estacao { get; set; }
+        [Required(ErrorMessage = "O campo Layout é obrigatório.")]
+        [EnumDataType(typeof(Layout), ErrorMessage = "O campo Layout é inválido.")]
+        public Layout Layout { get; set; }
     }
 }
