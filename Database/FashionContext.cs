@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace projeto_02.Database
 {
-        public class FashionContext : DbContext
+    public class FashionContext : DbContext
     {
         public FashionContext(DbContextOptions<FashionContext> options)
             : base(options)
@@ -15,6 +15,8 @@ namespace projeto_02.Database
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<Colecao> Colecoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,17 +25,10 @@ namespace projeto_02.Database
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         }
 
-            public DbSet<Pessoa> Pessoas { get; set; }
-
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        // Configurar a string de conexão com o banco de dados
-        optionsBuilder.UseSqlServer("labclothingcollectionbd");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Configurar a string de conexão com o banco de dados
+            optionsBuilder.UseSqlServer("labclothingcollectionbd");
+        }
     }
-
-            public DbSet<Colecao> Colecoes { get; set; }
-
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
-    }
-    }
+}

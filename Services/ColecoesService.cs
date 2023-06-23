@@ -10,21 +10,20 @@ using projeto_02.Services.Interfaces;
 
 namespace projeto_02.Services
 {
-  public class ColecoesService : IColecoesService
-  {
-     private readonly IColecoesRepository _colecoesRepository;
+    public class ColecoesService : IColecoesService
+    {
+        private readonly IColecoesRepository _colecoesRepository;
 
         public ColecoesService(IColecoesRepository colecoesRepository)
         {
             _colecoesRepository = colecoesRepository;
         }
 
-
         public async Task<bool?> CreateAsync(PostColecao postColecao)
         {
             try
             {
-                if (await _colecaoRepository.CheckNomeColecaoAsync(postColecao.NomeColecao))
+                if (await _colecoesRepository.CheckNomeColecaoAsync(postColecao.NomeColecao))
                     return null;
 
                 var colecao = new Colecao
@@ -37,7 +36,7 @@ namespace projeto_02.Services
                     Estacao = postColecao.Estacao,
                     EstadoSistema = postColecao.EstadoSistema,
                 };
-                
+
                 return await _colecoesRepository.CreateAsync(colecao);
             }
             catch (Exception e)
@@ -50,31 +49,30 @@ namespace projeto_02.Services
         {
             try
             {
-                var colecao = await _colecoesRepository.GetByIdAsync(putColecao.Id);
+var colecao = await _colecoesRepository.GetByIdAsync(putColecao.Id);
 
-                if (colecao == null)
-                    return null;
+if (colecao == null)
+    return null;
 
-                if (!string.IsNullOrEmpty(putColecao.NomeColecao))
-                    colecao.NomeColecao = putColecao.NomeColecao;
-                
-                if (!int.IsNullOrEmpty(putColecao.IdResponsavel))
-                colecao.IdResponsavel = putColecao.IdResponsavel;
+if (!string.IsNullOrEmpty(putColecao.NomeColecao))
+    colecao.NomeColecao = putColecao.NomeColecao;
 
-                if (!string.IsNullOrEmpty(putColecao.Marca))
-                    colecao.Marca = putColecao.Marca;
+if (putColecao.IdResponsavel != 0)
+    colecao.IdResponsavel = putColecao.IdResponsavel;
 
-                if (!double.IsNullOrEmpty(putColecao.Orcamento))
-                colecao.Orcamento = putColecao.Orcamento;
+if (!string.IsNullOrEmpty(putColecao.Marca))
+    colecao.Marca = putColecao.Marca;
 
-                if (putColecao.AnoLancamento != DateTime.MinValue)
-                    colecao.AnoLancamento = putColecao.AnoLancamento;
+if (putColecao.Orcamento != 0)
+    colecao.Orcamento = putColecao.Orcamento;
 
+if (putColecao.AnoLancamento != DateTime.MinValue)
+    colecao.AnoLancamento = putColecao.AnoLancamento;
 
-                if (!Enum.IsDefined(typeof(Estacao), putColecao.Estacao))
-                    colecao.Estacao = putColecao.Estacao;
+if (Enum.IsDefined(typeof(Estacao), putColecao.Estacao))
+    colecao.Estacao = putColecao.Estacao;
 
-                return await _colecoesRepository.UpdateAsync(colecao);
+return await _colecoesRepository.UpdateAsync(colecao);
             }
             catch (Exception e)
             {
@@ -91,10 +89,11 @@ namespace projeto_02.Services
                 if (colecao == null)
                     return null;
 
-                if (Enum.IsDefined(typeof(EstadoSistema), estadoSistema))
+                if (!Enum.IsDefined(typeof(EstadoSistema), estadoSistema))
                     return null;
 
-                return await _colecoesRepository.UpdateStatusAsync(id, estadoSistema);
+                    return await _colecoesRepository.UpdateEstadoSistemasAsync(id, estadoSistema);
+
             }
             catch (Exception e)
             {

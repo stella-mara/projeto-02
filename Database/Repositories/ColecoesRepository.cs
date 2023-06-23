@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using projeto_02.Database.Repositories.Interfaces;
 using projeto_02.Models;
 using projeto_02.Models.Enum;
@@ -11,19 +11,19 @@ namespace projeto_02.Database.Repositories
 {
     public class ColecoesRepository : IColecoesRepository
     {
-        private readonly FashionContext _context;
+        private readonly FashionContext _colecaoRepository;
 
-        public ColecoesRepository(FashionContext context)
+        public ColecoesRepository(FashionContext colecaoRepository)
         {
-            _context = context;
+            _colecaoRepository = colecaoRepository;
         }
-        
+
         public async Task<bool?> CreateAsync(Colecao colecao)
         {
             try
             {
-                await _context.Colecoes.AddAsync(colecao);
-                await _context.SaveChangesAsync();
+                await _colecaoRepository.Colecoes.AddAsync(colecao);
+                await _colecaoRepository.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
@@ -36,8 +36,8 @@ namespace projeto_02.Database.Repositories
         {
             try
             {
-                _context.Colecoes.Update(colecao);
-                await _context.SaveChangesAsync();
+                _colecaoRepository.Colecoes.Update(colecao);
+                await _colecaoRepository.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
@@ -56,8 +56,8 @@ namespace projeto_02.Database.Repositories
                     return null;
 
                 colecao.EstadoSistema = estadoSistema;
-                _context.Colecoes.Update(colecao);
-                await _context.SaveChangesAsync();
+                _colecaoRepository.Colecoes.Update(colecao);
+                await _colecaoRepository.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
@@ -71,13 +71,13 @@ namespace projeto_02.Database.Repositories
             try
             {
                 if (estadoSistema == null)
-                    return await _context.Colecoes.ToListAsync();
+                    return await _colecaoRepository.Colecoes.ToListAsync();
 
-                return await _context.Colecoes.Where(u => u.EstadoSistema == estadoSistema).ToListAsync();
+                return await _colecaoRepository.Colecoes.Where(u => u.EstadoSistema == estadoSistema).ToListAsync();
             }
             catch (Exception e)
             {
-                return new List<Colecoes>();
+                return new List<Colecao>();
             }
         }
 
@@ -85,7 +85,7 @@ namespace projeto_02.Database.Repositories
         {
             try
             {
-                return await _context.Colecoes.AnyAsync(u => u.NomeColecao == NomeColecao);
+                return await _colecaoRepository.Colecoes.AnyAsync(u => u.NomeColecao == NomeColecao);
             }
             catch (Exception e)
             {
@@ -97,7 +97,7 @@ namespace projeto_02.Database.Repositories
         {
             try
             {
-                return await _context.Colecoes.FindAsync(id);
+                return await _colecaoRepository.Colecoes.FindAsync(id);
             }
             catch (Exception e)
             {
@@ -109,13 +109,13 @@ namespace projeto_02.Database.Repositories
         {
             try
             {
-                var colecao = await _context.Colecoes.FindAsync(id);
+                var colecao = await _colecaoRepository.Colecoes.FindAsync(id);
 
                 if (colecao == null)
                     return null;
 
-                _context.Colecoes.Remove(colecao);
-                await _context.SaveChangesAsync();
+                _colecaoRepository.Colecoes.Remove(colecao);
+                await _colecaoRepository.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
