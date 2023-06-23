@@ -11,10 +11,10 @@ namespace projeto_02.Database.Repositories.Interfaces
     {
         Task<bool?> CreateAsync(Colecao colecao);
         Task<bool?> UpdateAsync(Colecao colecao);
-        Task<bool?> UpdateStatusAsync(int id, EstadoSistema estadoSistema);
-        Task<List<Usuario>> GetAllAsync(EstadoSistema? estadoSistema);
+        Task<bool?> UpdateEstadoSistemaAsync(int id, EstadoSistema estadoSistema);
+        Task<List<Colecao>> GetAllAsync(EstadoSistema? estadoSistema);
         Task<bool> CheckNomeColecaoAsync(string nomeColecao);
-        Task<Usuario?> GetByIdAsync(int id);
+        Task<Colecao?> GetByIdAsync(int id);
         Task<bool?> DeleteAsync(int id);
     }
 }

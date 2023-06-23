@@ -124,17 +124,17 @@ namespace projeto_02.Database.Repositories
             }
         }
 
-    public Task<bool?> UpdateStatusAsync(int id, EstadoSistema estadoSistema)
+    public Task<bool?> UpdateEstadoSistemaAsync(int id, EstadoSistema estadoSistema)
     {
       throw new NotImplementedException();
     }
 
-    Task<List<Usuario>> IColecoesRepository.GetAllAsync(EstadoSistema? estadoSistema)
+    Task<List<Colecao>> IColecoesRepository.GetAllAsync(EstadoSistema? estadoSistema)
     {
       throw new NotImplementedException();
     }
 
-    Task<Usuario?> IColecoesRepository.GetByIdAsync(int id)
+    Task<Colecao?> IColecoesRepository.GetByIdAsync(int id)
     {
       throw new NotImplementedException();
     }

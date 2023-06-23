@@ -92,7 +92,7 @@ return await _colecoesRepository.UpdateAsync(colecao);
                 if (!Enum.IsDefined(typeof(EstadoSistema), estadoSistema))
                     return null;
 
-                    return await _colecoesRepository.UpdateEstadoSistemasAsync(id, estadoSistema);
+                    return await _colecoesRepository.UpdateEstadoSistemaAsync(id, estadoSistema);
 
             }
             catch (Exception e)
