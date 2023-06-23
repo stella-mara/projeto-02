@@ -14,7 +14,7 @@ namespace projeto_02.Services
   {
      private readonly IColecoesRepository _colecoesRepository;
 
-        public UColecoesService(IColecoesRepository colecoesRepository)
+        public ColecoesService(IColecoesRepository colecoesRepository)
         {
             _colecoesRepository = colecoesRepository;
         }
@@ -111,5 +111,10 @@ namespace projeto_02.Services
         {
             return await _colecoesRepository.GetByIdAsync(id);
         }
+
+    public Task<bool?> UpdateStatusAsync(int id, EstadoSistema estadoSistema)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

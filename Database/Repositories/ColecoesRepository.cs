@@ -123,5 +123,20 @@ namespace projeto_02.Database.Repositories
                 return false;
             }
         }
+
+    public Task<bool?> UpdateStatusAsync(int id, EstadoSistema estadoSistema)
+    {
+      throw new NotImplementedException();
     }
+
+    Task<List<Usuario>> IColecoesRepository.GetAllAsync(EstadoSistema? estadoSistema)
+    {
+      throw new NotImplementedException();
+    }
+
+    Task<Usuario?> IColecoesRepository.GetByIdAsync(int id)
+    {
+      throw new NotImplementedException();
+    }
+  }
 }

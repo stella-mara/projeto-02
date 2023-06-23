@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using projeto_02.Models;
+using projeto_02.Models.Enum;
+using projeto_02.Models.ViewModels;
 
 namespace projeto_02.Services.Interfaces
 {
@@ -9,8 +12,8 @@ namespace projeto_02.Services.Interfaces
     {
         Task<bool?> CreateAsync(PostColecao colecao);
         Task<bool?> UpdateAsync(PutColecao colecao);
-        Task<bool?> UpdateStatusAsync(int id, EstadoSistema status);
-        Task<List<Usuario?>> GetAllAsync(EstadoSistema? status);
-        Task<Usuario?> GetByIdAsync(int id);
+        Task<bool?> UpdateStatusAsync(int id, EstadoSistema estadoSistema);
+        Task<List<Colecao?>> GetAllAsync(EstadoSistema? estadoSistema);
+        Task<Colecao?> GetByIdAsync(int id);
     }
 }
