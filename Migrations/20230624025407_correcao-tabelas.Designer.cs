@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projeto_02.Database;
 
@@ -11,9 +12,11 @@ using projeto_02.Database;
 namespace projeto_02.Migrations
 {
     [DbContext(typeof(FashionContext))]
-    partial class FashionContextModelSnapshot : ModelSnapshot
+    [Migration("20230624025407_correcao-tabelas")]
+    partial class correcaotabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
