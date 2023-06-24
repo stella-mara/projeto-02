@@ -22,6 +22,12 @@ builder.Services.AddDbContext<FashionContext>(options =>
 builder.Services.AddScoped<IUsuariosService, UsuariosService>();
 builder.Services.AddScoped<IUsuariosRepository, UsuariosRepository>();
 
+builder.Services.AddScoped<IColecoesService, ColecoesService>();
+builder.Services.AddScoped<IColecoesRepository, ColecoesRepository>();
+
+builder.Services.AddScoped<IModelosService, ModelosService>();
+builder.Services.AddScoped<IModelosRepository, ModelosRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

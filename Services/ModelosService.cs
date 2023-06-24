@@ -46,24 +46,24 @@ namespace projeto_02.Services
         {
             try
             {
-var modelo = await _modelosRepository.GetByIdAsync(putModelo.Id);
+                var modelo = await _modelosRepository.GetByIdAsync(putModelo.Id);
 
-if (modelo == null)
-    return null;
+                if (modelo == null)
+                    return null;
 
-if (!string.IsNullOrEmpty(putModelo.NomeModelo))
-    modelo.NomeModelo = putModelo.NomeModelo;
+                if (!string.IsNullOrEmpty(putModelo.NomeModelo))
+                    modelo.NomeModelo = putModelo.NomeModelo;
 
-if (putModelo.IdColecaoRelacionada != 0)
-    modelo.IdColecaoRelacionada = putModelo.IdColecaoRelacionada;
+                if (putModelo.IdColecaoRelacionada != 0)
+                    modelo.IdColecaoRelacionada = putModelo.IdColecaoRelacionada;
 
-if (Enum.IsDefined(typeof(Tipo), putModelo.Tipo))
-    modelo.Tipo = putModelo.Tipo;
+                if (Enum.IsDefined(typeof(Tipo), putModelo.Tipo))
+                    modelo.Tipo = putModelo.Tipo;
 
-if (Enum.IsDefined(typeof(Layout), putModelo.Layout))
-    modelo.Layout = putModelo.Layout;
+                if (Enum.IsDefined(typeof(Layout), putModelo.Layout))
+                    modelo.Layout = putModelo.Layout;
 
-return await _modelosRepository.UpdateAsync(modelo);
+                return await _modelosRepository.UpdateAsync(modelo);
             }
             catch (Exception e)
             {
@@ -71,25 +71,9 @@ return await _modelosRepository.UpdateAsync(modelo);
             }
         }
 
-
         public async Task<Modelo?> GetByIdAsync(int id)
         {
             return await _modelosRepository.GetByIdAsync(id);
         }
-
-    public Task<bool?> CreateAsync(PostModelo modelo)
-    {
-      throw new NotImplementedException();
     }
-
-    public Task<bool?> UpdateAsync(PutModelo modelo)
-    {
-      throw new NotImplementedException();
-    }
-
-    Task<Modelo?> IModelosService.GetByIdAsync(int id)
-    {
-      throw new NotImplementedException();
-    }
-  }
 }

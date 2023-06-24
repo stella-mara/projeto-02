@@ -11,24 +11,31 @@ namespace projeto_02.Database.Repositories
 {
     public class ModelosRepository : IModelosRepository
     {
-        private readonly FashionContext _modeloRepository;
+        private readonly FashionContext _context;
 
-        public ModelosRepository(FashionContext modeloRepository)
+        public ModelosRepository(FashionContext context)
         {
-            _modeloRepository = modeloRepository;
+            _context = context;
         }
 
-    public Task<bool> CheckNomeModeloAsync(string nomeModelo)
-    {
-      throw new NotImplementedException();
-    }
-
-    public async Task<bool?> CreateAsync(Modelo modelo)
+        public async Task<bool> CheckNomeModeloAsync(string nomeModelo)
         {
             try
             {
-                await _modeloRepository.Modelos.AddAsync(modelo);
-                await _modeloRepository.SaveChangesAsync();
+                return await _context.Modelos.AnyAsync(u => u.NomeModelo == nomeModelo);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool?> CreateAsync(Modelo modelo)
+        {
+            try
+            {
+                await _context.Modelos.AddAsync(modelo);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
@@ -37,36 +44,13 @@ namespace projeto_02.Database.Repositories
             }
         }
 
-    public Task<bool?> DeleteAsync(int id)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<Modelo?> GetByIdAsync(int id)
-    {
-      throw new NotImplementedException();
-    }
-
-    public async Task<bool?> UpdateAsync(Modelo modelo)
+        public async Task<bool?> UpdateAsync(Modelo modelo)
         {
             try
             {
-                _modeloRepository.Modelos.Update(modelo);
-                await _modeloRepository.SaveChangesAsync();
+                _context.Modelos.Update(modelo);
+                await _context.SaveChangesAsync();
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
-
-        public async Task<bool> CheckNomeModeloAsync(string NomeModelo)
-        {
-            try
-            {
-                return await _modeloRepository.Modelos.AnyAsync(u => u.NomeModelo == NomeModelo);
             }
             catch (Exception e)
             {
@@ -78,7 +62,7 @@ namespace projeto_02.Database.Repositories
         {
             try
             {
-                return await _modeloRepository.Modelos.FindAsync(id);
+                return await _context.Modelos.FindAsync(id);
             }
             catch (Exception e)
             {
@@ -90,13 +74,13 @@ namespace projeto_02.Database.Repositories
         {
             try
             {
-                var modelo = await _modeloRepository.Modelos.FindAsync(id);
+                var modelo = await _context.Modelos.FindAsync(id);
 
                 if (modelo == null)
                     return null;
 
-                _modeloRepository.Modelos.Remove(modelo);
-                await _modeloRepository.SaveChangesAsync();
+                _context.Modelos.Remove(modelo);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)
@@ -104,30 +88,5 @@ namespace projeto_02.Database.Repositories
                 return false;
             }
         }
-
-    Task<Modelo?> IModelosRepository.GetByIdAsync(int id)
-    {
-      throw new NotImplementedException();
     }
-
-    public Task<bool?> CreateAsync(Modelo modelo)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<bool?> UpdateAsync(Modelo modelo)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<bool> CheckNomeModeloAsync(string nomeModelo)
-    {
-      throw new NotImplementedException();
-    }
-
-    Task<Modelo?> IModelosRepository.GetByIdAsync(int id)
-    {
-      throw new NotImplementedException();
-    }
-  }
 }
