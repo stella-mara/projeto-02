@@ -33,8 +33,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
@@ -43,8 +43,8 @@ app.UseAuthorization();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<FashionContext>();
-    dbContext.Database.EnsureCreated();
+  var dbContext = scope.ServiceProvider.GetRequiredService<FashionContext>();
+  dbContext.Database.EnsureCreated();
 }
 
 app.MapControllers();

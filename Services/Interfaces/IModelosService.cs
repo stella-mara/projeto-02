@@ -8,10 +8,10 @@ using projeto_02.Models.ViewModels;
 
 namespace projeto_02.Services.Interfaces
 {
-    public interface IModelosService
-    {
-        Task<bool?> CreateAsync(PostModelo modelo);
-        Task<bool?> UpdateAsync(PutModelo modelo);
-        Task<Modelo?> GetByIdAsync(int id);
-    }
+  public interface IModelosService
+  {
+    Task<bool?> CreateAsync(PostModelo modelo);
+    Task<bool?> UpdateAsync(PutModelo modelo);
+    Task<Modelo?> GetByIdAsync(int id);
+  }
 }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace projeto_02.Models.Enum
 {
-    public enum EstadoSistema
-    {
-        Ativo = 1,
-        Inativo = 2
-    }
+  public enum EstadoSistema
+  {
+    Ativo = 1,
+    Inativo = 2
+  }
 }

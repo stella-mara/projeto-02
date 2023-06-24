@@ -10,106 +10,106 @@ using projeto_02.Services.Interfaces;
 
 namespace projeto_02.Services
 {
-    public class ColecoesService : IColecoesService
+  public class ColecoesService : IColecoesService
+  {
+    private readonly IColecoesRepository _colecoesRepository;
+
+    public ColecoesService(IColecoesRepository colecoesRepository)
     {
-        private readonly IColecoesRepository _colecoesRepository;
+      _colecoesRepository = colecoesRepository;
+    }
 
-        public ColecoesService(IColecoesRepository colecoesRepository)
+    public async Task<bool?> CreateAsync(PostColecao postColecao)
+    {
+      try
+      {
+        if (await _colecoesRepository.CheckNomeColecaoAsync(postColecao.NomeColecao))
+          return null;
+
+        var colecao = new Colecao
         {
-            _colecoesRepository = colecoesRepository;
-        }
+          NomeColecao = postColecao.NomeColecao,
+          IdResponsavel = postColecao.IdResponsavel,
+          Marca = postColecao.Marca,
+          Orcamento = postColecao.Orcamento,
+          AnoLancamento = postColecao.AnoLancamento,
+          Estacao = postColecao.Estacao,
+          EstadoSistema = postColecao.EstadoSistema,
+        };
 
-        public async Task<bool?> CreateAsync(PostColecao postColecao)
-        {
-            try
-            {
-                if (await _colecoesRepository.CheckNomeColecaoAsync(postColecao.NomeColecao))
-                    return null;
+        return await _colecoesRepository.CreateAsync(colecao);
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
 
-                var colecao = new Colecao
-                {
-                    NomeColecao = postColecao.NomeColecao,
-                    IdResponsavel = postColecao.IdResponsavel,
-                    Marca = postColecao.Marca,
-                    Orcamento = postColecao.Orcamento,
-                    AnoLancamento = postColecao.AnoLancamento,
-                    Estacao = postColecao.Estacao,
-                    EstadoSistema = postColecao.EstadoSistema,
-                };
+    public async Task<bool?> UpdateAsync(PutColecao putColecao)
+    {
+      try
+      {
+        var colecao = await _colecoesRepository.GetByIdAsync(putColecao.Id);
 
-                return await _colecoesRepository.CreateAsync(colecao);
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
+        if (colecao == null)
+          return null;
 
-        public async Task<bool?> UpdateAsync(PutColecao putColecao)
-        {
-            try
-            {
-var colecao = await _colecoesRepository.GetByIdAsync(putColecao.Id);
+        if (!string.IsNullOrEmpty(putColecao.NomeColecao))
+          colecao.NomeColecao = putColecao.NomeColecao;
 
-if (colecao == null)
-    return null;
+        if (putColecao.IdResponsavel != 0)
+          colecao.IdResponsavel = putColecao.IdResponsavel;
 
-if (!string.IsNullOrEmpty(putColecao.NomeColecao))
-    colecao.NomeColecao = putColecao.NomeColecao;
+        if (!string.IsNullOrEmpty(putColecao.Marca))
+          colecao.Marca = putColecao.Marca;
 
-if (putColecao.IdResponsavel != 0)
-    colecao.IdResponsavel = putColecao.IdResponsavel;
+        if (putColecao.Orcamento != 0)
+          colecao.Orcamento = putColecao.Orcamento;
 
-if (!string.IsNullOrEmpty(putColecao.Marca))
-    colecao.Marca = putColecao.Marca;
+        if (putColecao.AnoLancamento != DateTime.MinValue)
+          colecao.AnoLancamento = putColecao.AnoLancamento;
 
-if (putColecao.Orcamento != 0)
-    colecao.Orcamento = putColecao.Orcamento;
+        if (Enum.IsDefined(typeof(Estacao), putColecao.Estacao))
+          colecao.Estacao = putColecao.Estacao;
 
-if (putColecao.AnoLancamento != DateTime.MinValue)
-    colecao.AnoLancamento = putColecao.AnoLancamento;
+        return await _colecoesRepository.UpdateAsync(colecao);
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
 
-if (Enum.IsDefined(typeof(Estacao), putColecao.Estacao))
-    colecao.Estacao = putColecao.Estacao;
+    public async Task<bool?> UpdateEstadoSistemaAsync(int id, EstadoSistema estadoSistema)
+    {
+      try
+      {
+        var colecao = await _colecoesRepository.GetByIdAsync(id);
 
-return await _colecoesRepository.UpdateAsync(colecao);
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
+        if (colecao == null)
+          return null;
 
-        public async Task<bool?> UpdateEstadoSistemaAsync(int id, EstadoSistema estadoSistema)
-        {
-            try
-            {
-                var colecao = await _colecoesRepository.GetByIdAsync(id);
+        if (!Enum.IsDefined(typeof(EstadoSistema), estadoSistema))
+          return null;
 
-                if (colecao == null)
-                    return null;
+        return await _colecoesRepository.UpdateEstadoSistemaAsync(id, estadoSistema);
 
-                if (!Enum.IsDefined(typeof(EstadoSistema), estadoSistema))
-                    return null;
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
 
-                    return await _colecoesRepository.UpdateEstadoSistemaAsync(id, estadoSistema);
+    public async Task<List<Colecao>> GetAllAsync(EstadoSistema? estadoSistema)
+    {
+      return await _colecoesRepository.GetAllAsync(estadoSistema);
+    }
 
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
-        public async Task<List<Colecao>> GetAllAsync(EstadoSistema? estadoSistema)
-        {
-            return await _colecoesRepository.GetAllAsync(estadoSistema);
-        }
-
-        public async Task<Colecao?> GetByIdAsync(int id)
-        {
-            return await _colecoesRepository.GetByIdAsync(id);
-        }
+    public async Task<Colecao?> GetByIdAsync(int id)
+    {
+      return await _colecoesRepository.GetByIdAsync(id);
+    }
 
     public Task<bool?> UpdateStatusAsync(int id, EstadoSistema estadoSistema)
     {
