@@ -1,5 +1,4 @@
 # projeto-02
-[image](../AUDACES/logo-escrita.png)
 
 # LAB Clothing Collection
 
