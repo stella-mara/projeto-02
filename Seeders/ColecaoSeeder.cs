@@ -31,7 +31,6 @@ namespace projeto_02.Seeders
                    {
                 new Colecao
                 {
-                    Id = 1,
                     NomeColecao = "Colecao 1",
                     IdResponsavel = 1,
                     Marca = "Marca 1",
@@ -42,7 +41,6 @@ namespace projeto_02.Seeders
                 },
                 new Colecao
                 {
-                    Id = 2,
                     NomeColecao = "Colecao 2",
                     IdResponsavel = 2,
                     Marca = "Marca 2",
@@ -53,7 +51,6 @@ namespace projeto_02.Seeders
                 },
                 new Colecao
                 {
-                    Id = 3,
                     NomeColecao = "Colecao 3",
                     IdResponsavel = 3,
                     Marca = "Marca 3",
@@ -64,7 +61,6 @@ namespace projeto_02.Seeders
                 },
                 new Colecao
                 {
-                    Id = 4,
                     NomeColecao = "Colecao 4",
                     IdResponsavel = 4,
                     Marca = "Marca 4",
@@ -75,7 +71,6 @@ namespace projeto_02.Seeders
                 },
                 new Colecao
                 {
-                    Id = 5,
                     NomeColecao = "Colecao 5",
                     IdResponsavel = 5,
                     Marca = "Marca 5",

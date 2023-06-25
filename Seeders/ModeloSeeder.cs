@@ -9,29 +9,28 @@ using projeto_02.Models.Enum;
 
 namespace projeto_02.Seeders
 {
-   public interface IModelosSeeder
-   {
-       void SeedModelos();
-   }
+  public interface IModelosSeeder
+  {
+    void SeedModelos();
+  }
 
-   public class ModelosSeeder : IModelosSeeder
-   {
-       private readonly FashionContext _context;
+  public class ModelosSeeder : IModelosSeeder
+  {
+    private readonly FashionContext _context;
 
-       public ModelosSeeder(FashionContext context)
-       {
-           _context = context;
-       }
+    public ModelosSeeder(FashionContext context)
+    {
+      _context = context;
+    }
 
-       public void SeedModelos()
-       {
-           if (!_context.Modelos.Any())
-           {
-               var modelos = new List<Modelo>
+    public void SeedModelos()
+    {
+      if (!_context.Modelos.Any())
+      {
+        var modelos = new List<Modelo>
                    {
                 new Modelo
                 {
-                    Id = 1,
                     NomeModelo = "Modelo 1",
                     IdColecaoRelacionada = 1,
                     Tipo = Tipo.Bone,
@@ -39,7 +38,6 @@ namespace projeto_02.Seeders
                 },
                 new Modelo
                 {
-                    Id = 2,
                     NomeModelo = "Modelo 2",
                     IdColecaoRelacionada = 2,
                     Tipo = Tipo.Calcado,
@@ -47,7 +45,6 @@ namespace projeto_02.Seeders
                 },
                 new Modelo
                 {
-                    Id = 3,
                     NomeModelo = "Modelo 3",
                     IdColecaoRelacionada = 3,
                     Tipo = Tipo.Saia,
@@ -55,7 +52,6 @@ namespace projeto_02.Seeders
                 },
                 new Modelo
                 {
-                    Id = 4,
                     NomeModelo = "Modelo 4",
                     IdColecaoRelacionada = 4,
                     Tipo = Tipo.Biquini,
@@ -63,7 +59,6 @@ namespace projeto_02.Seeders
                 },
                 new Modelo
                 {
-                    Id = 5,
                     NomeModelo = "Modelo 5",
                     IdColecaoRelacionada = 5,
                     Tipo = Tipo.Bermuda,
@@ -71,9 +66,9 @@ namespace projeto_02.Seeders
                 }
                    };
 
-               _context.Modelos.AddRange(modelos);
-               _context.SaveChanges();
-           }
-       }
-   }
+        _context.Modelos.AddRange(modelos);
+        _context.SaveChanges();
+      }
+    }
+  }
 }
