@@ -71,9 +71,40 @@ namespace projeto_02.Services
       }
     }
 
+    public async Task<bool?> UpdateLayoutAsync(int id, Layout layout)
+    {
+      try
+      {
+        var modelo = await _modelosRepository.GetByIdAsync(id);
+
+        if (modelo == null)
+          return null;
+
+        if (!Enum.IsDefined(typeof(Layout), layout))
+          return null;
+
+        return await _modelosRepository.UpdateLayoutAsync(id, layout);
+
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
+
+    public async Task<List<Modelo>> GetAllAsync(Layout? layout)
+    {
+      return await _modelosRepository.GetAllAsync(layout);
+    }
+
     public async Task<Modelo?> GetByIdAsync(int id)
     {
       return await _modelosRepository.GetByIdAsync(id);
+    }
+
+    public Task<bool?> UpdateStatusAsync(int id, Layout layout)
+    {
+      throw new NotImplementedException();
     }
   }
 }

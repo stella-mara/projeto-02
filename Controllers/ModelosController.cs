@@ -63,6 +63,40 @@ namespace projeto_02.Controllers
       }
     }
 
+        [HttpPut("{id}/estadosistema")]
+    public async Task<IActionResult> Put([FromRoute] int id, [FromBody] EstadoSistema estadoSistema)
+    {
+      try
+      {
+        var result = await _service.UpdateStatusAsync(id, layout);
+
+        if (result == null)
+          return NotFound("Modelo/Layout não encontrado");
+
+        if (result == false)
+          return BadRequest("Erro ao alterar layout do modelo");
+
+        return Ok(layout);
+      }
+      catch (Exception e)
+      {
+        return BadRequest("Erro ao alterar layout do modelo");
+      }
+    }
+
+        [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] Layout? layout)
+    {
+      try
+      {
+        return Ok(await _service.GetAllAsync(layout));
+      }
+      catch (Exception e)
+      {
+        return BadRequest("Erro ao listar modelos");
+      }
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> Get([FromRoute] int id)
     {

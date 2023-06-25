@@ -13,9 +13,9 @@ namespace projeto_02.Database.Repositories
   {
     private readonly FashionContext _context;
 
-    public ModelosRepository(FashionContext context)
+    public ModelosRepository(FashionContext modeloRepository)
     {
-      _context = context;
+      _modeloRepository = modeloRepository;
     }
 
     public async Task<bool> CheckNomeModeloAsync(string nomeModelo)
@@ -88,5 +88,42 @@ namespace projeto_02.Database.Repositories
         return false;
       }
     }
+
+  public async Task<bool?> UpdateEstadoSistemasAsync(int id, Layout layout)
+    {
+      try
+      {
+        varmodelo = await GetByIdAsync(id);
+
+        if (modelo == null)
+          return null;
+
+        modelo.Layout = layout;
+        _modeloRepository.Modelos.Update(modelo);
+        await _modeloRepository.SaveChangesAsync();
+        return true;
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
+
+    public async Task<List<Modelo>> GetAllAsync(Layout? layout)
+    {
+      try
+      {
+        if (layout == null)
+          return await _modeloRepository.Modelos.ToListAsync();
+
+        return await _modeloRepository.Modelos.Where(u => u.Layout == layout).ToListAsync();
+      }
+      catch (Exception e)
+      {
+        return new List<Modelo>();
+      }
+    }
+
+
   }
 }

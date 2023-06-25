@@ -11,6 +11,8 @@ namespace projeto_02.Database.Repositories.Interfaces
   {
     Task<bool?> CreateAsync(Modelo modelo);
     Task<bool?> UpdateAsync(Modelo modelo);
+    Task<bool?> UpdateLayoutAsync(int id, Layout layout);
+    Task<List<Modelo>> GetAllAsync(Layout? layout);
     Task<bool> CheckNomeModeloAsync(string nomeModelo);
     Task<Modelo?> GetByIdAsync(int id);
     Task<bool?> DeleteAsync(int id);

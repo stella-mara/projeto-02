@@ -63,7 +63,7 @@ namespace projeto_02.Controllers
       }
     }
 
-    [HttpPut("{id}/status")]
+    [HttpPut("{id}/estadosistema")]
     public async Task<IActionResult> Put([FromRoute] int id, [FromBody] EstadoSistema estadoSistema)
     {
       try
