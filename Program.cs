@@ -39,9 +39,13 @@ builder.Services
 
  .AddScoped<IColecoesRepository, ColecoesRepository>()
 
+ .AddScoped<IColecoesSeeder, ColecoesSeeder>()
+
  .AddScoped<IModelosService, ModelosService>()
 
- .AddScoped<IModelosRepository, ModelosRepository>();
+ .AddScoped<IModelosRepository, ModelosRepository>()
+
+ .AddScoped<IModelosSeeder, ModelosSeeder>();
 
 var app = builder.Build();
 
@@ -66,6 +70,14 @@ if (app.Environment.IsDevelopment())
     var usuarioSeeder = scope.ServiceProvider.GetRequiredService<IUsuariosSeeder>();
 
     usuarioSeeder.SeedUsuarios();
+
+    var colecaoSeeder = scope.ServiceProvider.GetRequiredService<IColecoesSeeder>();
+
+    colecaoSeeder.SeedColecoes();
+
+    var modeloSeeder = scope.ServiceProvider.GetRequiredService<IModelosSeeder>();
+
+    modeloSeeder.SeedModelos();
 
   }
 
