@@ -12,6 +12,8 @@ namespace projeto_02.Services.Interfaces
   {
     Task<bool?> CreateAsync(PostModelo modelo);
     Task<bool?> UpdateAsync(PutModelo modelo);
+    Task<bool?> UpdateLayoutAsync(int id, Layout layout);
+    Task<List<Modelo?>> GetAllAsync(Layout? layout);
     Task<Modelo?> GetByIdAsync(int id);
   }
 }

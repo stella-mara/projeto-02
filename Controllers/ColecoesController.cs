@@ -68,7 +68,7 @@ namespace projeto_02.Controllers
     {
       try
       {
-        var result = await _service.UpdateStatusAsync(id, estadoSistema);
+        var result = await _service.UpdateEstadoSistemaAsync(id, estadoSistema);
 
         if (result == null)
           return NotFound("Coleção/Estado do Sistema não encontrado");

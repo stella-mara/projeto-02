@@ -68,7 +68,7 @@ namespace projeto_02.Seeders
                           Genero = "Masculino",
                           DataNascimento = new DateTime(1980, 12, 31),
                           CpfCnpj = "002.654.987-00",
-                          Telefone = "(00) 3210-9866"
+                          Telefone = "(00) 3210-9866",
                           Email = "henrique.jose@example.com",
                           TipoUsuario = TipoUsuario.Outro,
                           Status = Status.Ativo

@@ -10,104 +10,74 @@ using projeto_02.Models.ViewModels;
 
 namespace projeto_02.Controllers
 {
-  [ApiController]
-  [Route("api/[controller]")]
-  public class ModelosController : ControllerBase
-  {
-    private readonly IModelosService _service;
-
-    public ModelosController(IModelosService service)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ModelosController : ControllerBase
     {
-      _service = service;
-    }
+        private readonly IModelosService _service;
 
-    [HttpPost]
-    public async Task<IActionResult> Post([FromBody] PostModelo modelo)
-    {
-      try
-      {
-        var result = await _service.CreateAsync(modelo);
+        public ModelosController(IModelosService service)
+        {
+            _service = service;
+        }
 
-        if (result == null)
-          return Conflict("Modelo já cadastrado");
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] PostModelo modelo)
+        {
+            var result = await _service.CreateAsync(modelo);
 
-        if (result == false)
-          return BadRequest("Erro ao criar modelo");
+            if (result == null)
+                return Conflict("Modelo já cadastrado");
 
-        return StatusCode((int)HttpStatusCode.Created);
-      }
-      catch (Exception e)
-      {
-        return BadRequest("Erro ao criar modelo");
-      }
-    }
+            if (!result.Value)
+                return BadRequest("Erro ao criar modelo");
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Put([FromRoute] int id, [FromBody] PutModelo modelo)
-    {
-      try
-      {
-        var result = await _service.UpdateAsync(modelo);
+            return CreatedAtRoute(nameof(Get), new { id = modelo.Id }, modelo);
+        }
 
-        if (result == null)
-          return NotFound("Modelo não encontrado");
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] PutModelo modelo)
+        {
+            var result = await _service.UpdateAsync(modelo);
 
-        if (result == false)
-          return BadRequest("Erro ao alterar modelo");
+            if (result == null)
+                return NotFound("Modelo não encontrado");
 
-        return Ok(modelo);
-      }
-      catch (Exception e)
-      {
-        return BadRequest("Erro ao alterar modelo");
-      }
-    }
+            if (!result.Value)
+                return BadRequest("Erro ao alterar modelo");
 
-        [HttpPut("{id}/estadosistema")]
-    public async Task<IActionResult> Put([FromRoute] int id, [FromBody] EstadoSistema estadoSistema)
-    {
-      try
-      {
-        var result = await _service.UpdateStatusAsync(id, layout);
+            return Ok(modelo);
+        }
 
-        if (result == null)
-          return NotFound("Modelo/Layout não encontrado");
+        [HttpPut("{id}/layout")]
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Layout layout)
+        {
+            var result = await _service.UpdateLayoutAsync(id, layout);
 
-        if (result == false)
-          return BadRequest("Erro ao alterar layout do modelo");
+            if (result == null)
+                return NotFound("Modelo/Layout não encontrado");
 
-        return Ok(layout);
-      }
-      catch (Exception e)
-      {
-        return BadRequest("Erro ao alterar layout do modelo");
-      }
-    }
+            if (!result.Value)
+                return BadRequest("Erro ao alterar layout do modelo");
+
+            return Ok(layout);
+        }
 
         [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] Layout? layout)
-    {
-      try
-      {
-        return Ok(await _service.GetAllAsync(layout));
-      }
-      catch (Exception e)
-      {
-        return BadRequest("Erro ao listar modelos");
-      }
-    }
+        public async Task<IActionResult> GetAll([FromQuery] Layout? layout)
+        {
+            return Ok(await _service.GetAllAsync(layout));
+        }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get([FromRoute] int id)
-    {
-      try
-      {
-        return Ok(await _service.GetByIdAsync(id));
-      }
-      catch (Exception e)
-      {
-        return BadRequest("Erro ao obter modelo");
-      }
+        [HttpGet("{id}", Name = "Get")]
+        public async Task<IActionResult> Get([FromRoute] int id)
+        {
+            var modelo = await _service.GetByIdAsync(id);
+
+            if (modelo == null)
+                return NotFound("Modelo não encontrado");
+
+            return Ok(modelo);
+        }
     }
-  }
 }

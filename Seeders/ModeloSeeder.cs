@@ -34,40 +34,40 @@ namespace projeto_02.Seeders
                     Id = 1,
                     NomeModelo = "Modelo 1",
                     IdColecaoRelacionada = 1,
-                    Tipo = Tipo.Tipo1,
-                    Layout = Layout.Layout1
+                    Tipo = Tipo.Bone,
+                    Layout = Layout.Bordado
                 },
                 new Modelo
                 {
                     Id = 2,
                     NomeModelo = "Modelo 2",
                     IdColecaoRelacionada = 2,
-                    Tipo = Tipo.Tipo2,
-                    Layout = Layout.Layout2
+                    Tipo = Tipo.Calcado,
+                    Layout = Layout.Lisa
                 },
                 new Modelo
                 {
                     Id = 3,
                     NomeModelo = "Modelo 3",
                     IdColecaoRelacionada = 3,
-                    Tipo = Tipo.Tipo3,
-                    Layout = Layout.Layout3
+                    Tipo = Tipo.Saia,
+                    Layout = Layout.Estampa
                 },
                 new Modelo
                 {
                     Id = 4,
                     NomeModelo = "Modelo 4",
                     IdColecaoRelacionada = 4,
-                    Tipo = Tipo.Tipo4,
-                    Layout = Layout.Layout4
+                    Tipo = Tipo.Biquini,
+                    Layout = Layout.Bordado
                 },
                 new Modelo
                 {
                     Id = 5,
                     NomeModelo = "Modelo 5",
                     IdColecaoRelacionada = 5,
-                    Tipo = Tipo.Tipo5,
-                    Layout = Layout.Layout5
+                    Tipo = Tipo.Bermuda,
+                    Layout = Layout.Estampa
                 }
                    };
 

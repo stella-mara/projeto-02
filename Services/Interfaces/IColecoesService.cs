@@ -12,7 +12,7 @@ namespace projeto_02.Services.Interfaces
   {
     Task<bool?> CreateAsync(PostColecao colecao);
     Task<bool?> UpdateAsync(PutColecao colecao);
-    Task<bool?> UpdateStatusAsync(int id, EstadoSistema estadoSistema);
+    Task<bool?> UpdateEstadoSistemaAsync(int id, EstadoSistema estadoSistema);
     Task<List<Colecao?>> GetAllAsync(EstadoSistema? estadoSistema);
     Task<Colecao?> GetByIdAsync(int id);
   }

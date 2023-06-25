@@ -15,27 +15,15 @@ namespace projeto_02.Database.Repositories
 
     public ModelosRepository(FashionContext modeloRepository)
     {
-      _modeloRepository = modeloRepository;
-    }
-
-    public async Task<bool> CheckNomeModeloAsync(string nomeModelo)
-    {
-      try
-      {
-        return await _context.Modelos.AnyAsync(u => u.NomeModelo == nomeModelo);
-      }
-      catch (Exception e)
-      {
-        return false;
-      }
+      modeloRepository = modeloRepository;
     }
 
     public async Task<bool?> CreateAsync(Modelo modelo)
     {
       try
       {
-        await _context.Modelos.AddAsync(modelo);
-        await _context.SaveChangesAsync();
+        await _modeloRepository.Modelos.AddAsync(modelo);
+        await _modeloRepository.SaveChangesAsync();
         return true;
       }
       catch (Exception e)
@@ -48,8 +36,8 @@ namespace projeto_02.Database.Repositories
     {
       try
       {
-        _context.Modelos.Update(modelo);
-        await _context.SaveChangesAsync();
+        _modeloRepository.Modelos.Update(modelo);
+        await _modeloRepository.SaveChangesAsync();
         return true;
       }
       catch (Exception e)
@@ -58,42 +46,11 @@ namespace projeto_02.Database.Repositories
       }
     }
 
-    public async Task<Modelo?> GetByIdAsync(int id)
+    public async Task<bool?> UpdateLayoutAsync(int id, Layout layout)
     {
       try
       {
-        return await _context.Modelos.FindAsync(id);
-      }
-      catch (Exception e)
-      {
-        return null;
-      }
-    }
-
-    public async Task<bool?> DeleteAsync(int id)
-    {
-      try
-      {
-        var modelo = await _context.Modelos.FindAsync(id);
-
-        if (modelo == null)
-          return null;
-
-        _context.Modelos.Remove(modelo);
-        await _context.SaveChangesAsync();
-        return true;
-      }
-      catch (Exception e)
-      {
-        return false;
-      }
-    }
-
-  public async Task<bool?> UpdateEstadoSistemasAsync(int id, Layout layout)
-    {
-      try
-      {
-        varmodelo = await GetByIdAsync(id);
+        var modelo = await GetByIdAsync(id);
 
         if (modelo == null)
           return null;
@@ -124,6 +81,78 @@ namespace projeto_02.Database.Repositories
       }
     }
 
+    public async Task<bool> CheckNomeModeloAsync(string NomeModelo)
+    {
+      try
+      {
+        return await _modeloRepository.Modelos.AnyAsync(u => u.NomeModelo == NomeModelo);
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
+
+    public async Task<Modelo?> GetByIdAsync(int id)
+    {
+      try
+      {
+        return await _modeloRepository.Modelos.FindAsync(id);
+      }
+      catch (Exception e)
+      {
+        return null;
+      }
+    }
+
+    public async Task<bool?> DeleteAsync(int id)
+    {
+      try
+      {
+        var modelo = await _modeloRepository.Modelos.FindAsync(id);
+
+        if (modelo == null)
+          return null;
+
+        _modeloRepository.Modelos.Remove(modelo);
+        await _modeloRepository.SaveChangesAsync();
+        return true;
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
+
+    public Task<bool?> UpdateLayoutAsync(int id, Layout layout)
+    {
+      throw new NotImplementedException();
+    }
+
+    Task<List<Modelo>> IModelosRepository.GetAllAsync(Layout? layout)
+    {
+      throw new NotImplementedException();
+    }
+
+    Task<Modelo?> IModelosRepository.GetByIdAsync(int id)
+    {
+      throw new NotImplementedException();
+    }
+
+    public Task<bool?> CreateAsync(Modelo modelo)
+    {
+      throw new NotImplementedException();
+    }
+
+    public Task<bool?> UpdateAsync(Modelo modelo)
+    {
+      throw new NotImplementedException();
+    }
+
+    public Task<bool> CheckNomeModeloAsync(string nomeModelo)
+    {
+      throw new NotImplementedException();
+    }
 
   }
 }
