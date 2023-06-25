@@ -14,20 +14,14 @@ namespace projeto_02.Seeders
        void SeedUsuarios();
    }
 
-
-
    public class UsuariosSeeder : IUsuariosSeeder
    {
        private readonly FashionContext _context;
-
-
 
        public UsuariosSeeder(FashionContext context)
        {
            _context = context;
        }
-
-
 
        public void SeedUsuarios()
        {
@@ -48,19 +42,49 @@ namespace projeto_02.Seeders
                        },
                        new Usuario
                        {
-                           NomeCommpleto = "Maria Santos",
+                           NomeCommpleto = "Maria Almeida",
                            Genero = "Feminino",
-                           DataNascimento = new DateTime(1985, 9, 20),
-                           CpfCnpj = "987.654.321-00",
-                           Telefone = "(11) 9876-5432",
-                           Email = "maria.santos@example.com",
+                           DataNascimento = new DateTime(1985, 12, 20),
+                           CpfCnpj = "987.678.321-00",
+                           Telefone = "(11) 9876-5411",
+                           Email = "maria.almeida@example.com",
                            TipoUsuario = TipoUsuario.Outro,
                            Status = Status.Ativo
                        },
-                       // Adicione mais usuários aqui, se necessário
+                        new Usuario
+                       {
+                           NomeCommpleto = "João Silva",
+                           Genero = "asculino",
+                           DataNascimento = new DateTime(1985, 1, 20),
+                           CpfCnpj = "105.654.321-00",
+                           Telefone = "(11) 9899-5432",
+                           Email = "joao.silva@example.com",
+                           TipoUsuario = TipoUsuario.Outro,
+                           Status = Status.Ativo
+                       },                       
+                       new Usuario
+                       {
+                          NomeCommpleto = "Henrique José",
+                          Genero = "Masculino",
+                          DataNascimento = new DateTime(1980, 12, 31),
+                          CpfCnpj = "002.654.987-00",
+                          Telefone = "(00) 3210-9866"
+                          Email = "henrique.jose@example.com",
+                          TipoUsuario = TipoUsuario.Outro,
+                          Status = Status.Ativo
+                       },                       
+                       new Usuario
+                       {
+                           NomeCommpleto = "Luiza Santos",
+                           Genero = "Feminino",
+                           DataNascimento = new DateTime(1982, 9, 20),
+                           CpfCnpj = "987.654.987-00",
+                           Telefone = "(11) 9976-5432",
+                           Email = "luiza.santos@example.com",
+                           TipoUsuario = TipoUsuario.Outro,
+                           Status = Status.Ativo
+                       },
                    };
-
-
 
                _context.Usuarios.AddRange(usuarios);
                _context.SaveChanges();
