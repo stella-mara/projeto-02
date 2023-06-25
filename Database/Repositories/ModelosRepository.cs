@@ -15,15 +15,15 @@ namespace projeto_02.Database.Repositories
 
     public ModelosRepository(FashionContext modeloRepository)
     {
-      modeloRepository = modeloRepository;
+      _context = modeloRepository;
     }
 
     public async Task<bool?> CreateAsync(Modelo modelo)
     {
       try
       {
-        await _modeloRepository.Modelos.AddAsync(modelo);
-        await _modeloRepository.SaveChangesAsync();
+        await _context.Modelos.AddAsync(modelo);
+        await _context.SaveChangesAsync();
         return true;
       }
       catch (Exception e)
@@ -36,8 +36,8 @@ namespace projeto_02.Database.Repositories
     {
       try
       {
-        _modeloRepository.Modelos.Update(modelo);
-        await _modeloRepository.SaveChangesAsync();
+        _context.Modelos.Update(modelo);
+        await _context.SaveChangesAsync();
         return true;
       }
       catch (Exception e)
@@ -56,8 +56,8 @@ namespace projeto_02.Database.Repositories
           return null;
 
         modelo.Layout = layout;
-        _modeloRepository.Modelos.Update(modelo);
-        await _modeloRepository.SaveChangesAsync();
+        _context.Modelos.Update(modelo);
+        await _context.SaveChangesAsync();
         return true;
       }
       catch (Exception e)
@@ -71,9 +71,9 @@ namespace projeto_02.Database.Repositories
       try
       {
         if (layout == null)
-          return await _modeloRepository.Modelos.ToListAsync();
+          return await _context.Modelos.ToListAsync();
 
-        return await _modeloRepository.Modelos.Where(u => u.Layout == layout).ToListAsync();
+        return await _context.Modelos.Where(u => u.Layout == layout).ToListAsync();
       }
       catch (Exception e)
       {
@@ -81,11 +81,11 @@ namespace projeto_02.Database.Repositories
       }
     }
 
-    public async Task<bool> CheckNomeModeloAsync(string NomeModelo)
+    public async Task<bool> CheckNomeModeloAsync(string nomeModelo)
     {
       try
       {
-        return await _modeloRepository.Modelos.AnyAsync(u => u.NomeModelo == NomeModelo);
+        return await _context.Modelos.AnyAsync(u => u.NomeModelo == nomeModelo);
       }
       catch (Exception e)
       {
@@ -97,7 +97,7 @@ namespace projeto_02.Database.Repositories
     {
       try
       {
-        return await _modeloRepository.Modelos.FindAsync(id);
+        return await _context.Modelos.FindAsync(id);
       }
       catch (Exception e)
       {
@@ -109,13 +109,13 @@ namespace projeto_02.Database.Repositories
     {
       try
       {
-        var modelo = await _modeloRepository.Modelos.FindAsync(id);
+        var modelo = await _context.Modelos.FindAsync(id);
 
         if (modelo == null)
           return null;
 
-        _modeloRepository.Modelos.Remove(modelo);
-        await _modeloRepository.SaveChangesAsync();
+        _context.Modelos.Remove(modelo);
+        await _context.SaveChangesAsync();
         return true;
       }
       catch (Exception e)
@@ -123,36 +123,5 @@ namespace projeto_02.Database.Repositories
         return false;
       }
     }
-
-    public Task<bool?> UpdateLayoutAsync(int id, Layout layout)
-    {
-      throw new NotImplementedException();
-    }
-
-    Task<List<Modelo>> IModelosRepository.GetAllAsync(Layout? layout)
-    {
-      throw new NotImplementedException();
-    }
-
-    Task<Modelo?> IModelosRepository.GetByIdAsync(int id)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<bool?> CreateAsync(Modelo modelo)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<bool?> UpdateAsync(Modelo modelo)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<bool> CheckNomeModeloAsync(string nomeModelo)
-    {
-      throw new NotImplementedException();
-    }
-
   }
 }

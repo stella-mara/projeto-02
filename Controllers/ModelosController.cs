@@ -24,15 +24,22 @@ namespace projeto_02.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PostModelo modelo)
         {
+            try 
+            {
             var result = await _service.CreateAsync(modelo);
 
             if (result == null)
                 return Conflict("Modelo já cadastrado");
 
-            if (!result.Value)
+            if (result == false)
                 return BadRequest("Erro ao criar modelo");
 
-            return CreatedAtRoute(nameof(Get), new { id = modelo.Id }, modelo);
+            return StatusCode((int)HttpStatusCode.Created);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Erro ao criar coleção");
+            }
         }
 
         [HttpPut("{id}")]
@@ -50,7 +57,7 @@ namespace projeto_02.Controllers
         }
 
         [HttpPut("{id}/layout")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Layout layout)
+        public async Task<IActionResult> Put([FromRoute] int id, Layout layout)
         {
             var result = await _service.UpdateLayoutAsync(id, layout);
 
@@ -66,7 +73,14 @@ namespace projeto_02.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] Layout? layout)
         {
-            return Ok(await _service.GetAllAsync(layout));
+         try
+        {
+        return Ok(await _service.GetAllAsync(layout));
+        }
+        catch (Exception e)
+        {
+        return BadRequest("Erro ao listar coleções");
+        }
         }
 
         [HttpGet("{id}", Name = "Get")]
