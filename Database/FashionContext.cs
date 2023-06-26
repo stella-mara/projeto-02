@@ -15,7 +15,7 @@ namespace projeto_02.Database
     }
 
     public DbSet<Usuario> Usuarios { get; set; }
-    //public DbSet<Pessoa> Pessoas { get; set; }
+   
     public DbSet<Colecao> Colecoes { get; set; }
     public DbSet<Modelo> Modelos { get; set; }
 
